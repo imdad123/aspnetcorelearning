@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Bulkyweb.Models.Student>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+
+<h2>Students @accessor.HttpContext.Session.GetString("name")</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+       
+            <tr>
+                <td>@Html.DisplayFor(m => student.Name)</td>
+               
+                <td>
+                    <a asp-action="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@student.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Add Student</a>
